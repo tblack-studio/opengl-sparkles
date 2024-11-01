@@ -974,9 +974,6 @@
     <ClInclude Include="src\ol_objects\frame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\tex_sprite.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\spritesheet.png">

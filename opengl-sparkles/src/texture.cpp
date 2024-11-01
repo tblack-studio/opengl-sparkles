@@ -44,13 +44,14 @@ void Texture::load()
 /*
 * texture coor is upper left based
 */
-std::array<glm::vec2, 4> Texture::getSprite(glm::vec2 position, glm::vec2 size)
+std::array<glm::vec2, 4> Texture::getSprite(glm::vec2 position, glm::vec2 size) const
 {
 		/*
+		* vertical flip then get by lower left https://www.puredevsoftware.com/blog/2018/03/17/texture-coordinates-d3d-vs-opengl/
 		* gl texture position is lower left based (x: 0 -> 1, y: 0 -> 1)
 		*/
-		auto top = 1.0f - position.y / height;
-		auto bottom = top - size.y / height;
+		auto bottom = 1.0f - position.y / height; // horizontal flip: top -> bottom
+		auto top = bottom + size.y / height;
 
 		auto left = position.x / width;
 		auto right = left + size.x / width;

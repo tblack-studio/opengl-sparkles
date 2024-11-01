@@ -442,7 +442,6 @@
     <ClInclude Include="src\ortho_camera.h" />
     <ClInclude Include="src\perspective_camera.h" />
     <ClInclude Include="src\texture.h" />
-    <ClInclude Include="src\tex_sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\ol_objects\frame.cpp" />

@@ -9,7 +9,7 @@ public:
 				int textureNameId);
 		void load();
 		/* from texture coordinate to gl coordinate*/
-		std::array<glm::vec2, 4> getSprite(glm::vec2 position, glm::vec2 size);
+		std::array<glm::vec2, 4> getSprite(glm::vec2 position, glm::vec2 size) const;
 		glm::vec2 getImageSize();
 private:
 		const char* filePath;

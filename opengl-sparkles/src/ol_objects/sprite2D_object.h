@@ -2,7 +2,6 @@
 #include "ol_object.h"
 #include "../camera.h"
 #include "../texture.h"
-#include "../tex_sprite.h"
 
 class Sprite2DObject :
 		public OlObject
@@ -16,7 +15,7 @@ public:
 		void setSize(glm::vec2 size);
 		void setTexturePtr(Texture* texturePtr);
 		void setSpriteTexture(glm::vec2 position, glm::vec2 size);
-		void setTexSprite();
+		void setupUV();
 protected:
 		void prepareRender() override;
 private:
@@ -30,6 +29,6 @@ private:
 		Texture* texturePtr;
 		glm::vec2 texPosition;
 		glm::vec2 texSize;
-		TexSprite texSprite;
+		std::array<glm::vec2, 4> uvCorners;
 };
 

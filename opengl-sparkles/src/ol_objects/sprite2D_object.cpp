@@ -10,7 +10,6 @@ Sprite2DObject::Sprite2DObject()
 }
 
 void Sprite2DObject::prepareRender() {
-		auto textureInfo = this->texturePtr->getSprite(this->texPosition, this->texSize);
 		auto vertexStride = 8; // 8 float values per vertex
 		// set up vertex data (and buffer(s)) and configure vertex attributes	
 		auto halfWidth = this->size.x / 2.0f;
@@ -18,19 +17,11 @@ void Sprite2DObject::prepareRender() {
 
 		std::vector<float> vertices = {
 				// positions																// colors           // texture coords
-				-halfWidth, halfHeight, 0,									1,0,0,							textureInfo[0].x, textureInfo[0].y, // left top
-				halfWidth, halfHeight, 0,										1,0,0,							textureInfo[1].x, textureInfo[1].y, // right top
-				halfWidth, -halfHeight, 0,									1,0,0,							textureInfo[2].x, textureInfo[2].y, // right bottom
-				-halfWidth, -halfHeight, 0,									1,0,0,							textureInfo[3].x, textureInfo[3].y, // left bottom
+				-halfWidth, halfHeight, 0,									1,0,0,							uvCorners[0].x, uvCorners[0].y, // left top
+				halfWidth, halfHeight, 0,										1,0,0,							uvCorners[1].x, uvCorners[1].y, // right top
+				halfWidth, -halfHeight, 0,									1,0,0,							uvCorners[2].x, uvCorners[2].y, // right bottom
+				-halfWidth, -halfHeight, 0,									1,0,0,							uvCorners[3].x, uvCorners[3].y, // left bottom
 		};
-
-		//std::vector<float> vertices = {
-		//		// positions																// colors           // texture coords: https://devcry.heiho.net/html/2017/20170930-opengl-spritesheet.html
-		//		-halfWidth, halfHeight, 0,									1,0,0,							texSprite.tx, texSprite.ty,
-		//		halfWidth, halfHeight, 0,										1,0,0,							texSprite.tx + texSprite.tw, texSprite.ty,
-		//		halfWidth, -halfHeight, 0,									1,0,0,							texSprite.tx, texSprite.ty + texSprite.th,
-		//		-halfWidth, -halfHeight, 0,									1,0,0,							texSprite.tx + texSprite.tw, texSprite.ty + texSprite.th,
-		//};
 
 		std::vector<unsigned int> indices = {
 				0, 1, 3, // first triangle
@@ -98,18 +89,12 @@ void Sprite2DObject::setTexturePtr(Texture* texturePtr)
 
 void Sprite2DObject::setSpriteTexture(glm::vec2 position, glm::vec2 size)
 {
-		this->texPosition = position;
-		this->texSize = size;
+		texPosition = position;
+		texSize = size;
+		setupUV();
 }
 
-void Sprite2DObject::setTexSprite()
+void Sprite2DObject::setupUV()
 {
-		texSprite.h = texSize.y;
-		texSprite.w = texSize.x;
-		texSprite.x = texPosition.x;
-		texSprite.y = texPosition.y;
-
-		auto imgSize = texturePtr->getImageSize();
-
-		texSprite.setTexInfo(imgSize.x, imgSize.y);
+		uvCorners = texturePtr->getSprite(texPosition, texSize);
 }

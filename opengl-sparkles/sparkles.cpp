@@ -60,12 +60,11 @@ int main()
 		sprite.setPosition(glm::vec3(SCR_WIDTH / 2.0f, SCR_HEIGHT / 2.0f, 0));
 		sprite.setSize(glm::vec2(spriteSize, spriteSize));
 		sprite.setSpriteTexture(glm::vec2(0, 0), glm::vec2(spriteSize, spriteSize));
-		sprite.setTexSprite();
+		sprite.setupUV();
 
 		Animation animation(0.15f);
 		animation.setLoop(true);
 		animation.setSpriteRenderer(&sprite);
-
 
 		animation.addFrame(Frame(glm::vec2(0, 0), glm::vec2(spriteSize, spriteSize)));
 		animation.addFrame(Frame(glm::vec2(spriteSize, 0), glm::vec2(spriteSize, spriteSize)));
